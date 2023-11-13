@@ -1,23 +1,41 @@
 package com.game.entity;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
-
+@Entity
+@Table(name = "player", schema = "rpg")
+@org.hibernate.annotations.NamedQueries({
+        @org.hibernate.annotations.NamedQuery(name = "Player_GetAllCount",
+                query = "select count(*) from Player")
+})
 public class Player {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 12, nullable = false)
     private String name;
 
+    @Column(length = 30, nullable = false)
     private String title;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private Race race;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private Profession profession;
 
+    @Column(nullable = false)
     private Date birthday;
 
+    @Column(nullable = false)
     private Boolean banned;
 
+    @Column(nullable = false)
     private Integer level;
 
     public Player() {
